@@ -6,6 +6,7 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.controllers.Controller;
+import com.badlogic.gdx.controllers.ControllerListener;
 import com.badlogic.gdx.controllers.Controllers;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
@@ -58,6 +59,13 @@ public class GameScreen implements Screen {
         // create the raindrops array and spawn the first raindrop
         raindrops = new Array<>();
         spawnRaindrop();
+
+        Array<Controller> controllers = Controllers.getControllers();
+
+        if (controllers.size > 0) {
+            Controller controller = controllers.get(0);
+            controller.addListener(new ControllerMappingListener());
+        }
 
     }
 
